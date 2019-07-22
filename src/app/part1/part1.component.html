@@ -1,0 +1,46 @@
+<div>
+  <table>
+    <caption><b>My Books</b></caption>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Qty</th>
+        <th>UnitPrice</th>
+        <th>$Unit Price</th>
+        <th>Line Total</th>
+        <th>Total {{updateTotal() | currency:'USD':true:'2.2-2'}}</th>
+      </tr>
+    </thead>
+    <tfoot>
+      <tr>
+        <th><button id="new" (click)="addNew()">New</button></th>
+        <th><button id="save" (click)="save()">Save</button></th>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr *ngFor="let bookinstance of book; let i = index;">
+        <td>
+          <input type="text" [(ngModel)]="bookinstance.title">
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="bookinstance.qty" size='1'>
+        </td>
+        <td>
+          <input type="text" [(ngModel)]="bookinstance.price" size='5'>
+        </td>
+        <td>
+          <li>{{ bookinstance.price | currency:'USD':true:'2.2-2' }}</li>
+        </td>
+        <td>
+          <li>{{ updateLineTotal(i) | currency:'USD':true:'2.2-2'  }}</li>
+        </td>
+        <td>
+          <li><button (click)="remove(i)">
+              Remove
+            </button></li>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <b>Book Count : {{ count }}</b>
+</div>
